@@ -1,0 +1,299 @@
+Day 30 - Day2-Docker. 02-Feb-2026
+
+
+#
+>>>>> go to google -- search for get docker >> will get below sode
+
+# To install the latest stable versions of Docker CLI, Docker Engine, and their
+# dependencies:
+#
+# 1. download the script
+#
+#   $ curl -fsSL https://get.docker.com -o install-docker.sh
+#
+# 2. verify the script's content
+#
+#   $ cat install-docker.sh
+#
+# 3. run the script with --dry-run to verify the steps it executes
+#
+#   $ sh install-docker.sh --dry-run
+#
+# 4. run the script either as root, or using sudo to perform the installation.
+#
+#   $ sudo sh install-docker.sh
+
+--------------------------------------------------
+Docer Architecture --
+
+docker run hello-world
+
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.(amd64)
+ 3. The Docker daemon created a new container from that image which runs the executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it to your terminal.
+	
+Docker client -- 
+Docker daemon -- Background process	
+---------------------------------------------------------
+
+
+docker start containerid
+
+
+Step 1 – Pull ubuntu image from docker hub
+
+docker images
+
+Step 2  - Run the image in interactive mode to make a container
+
+	docker run -it ubuntu     
+
+ 
+
+Step 3 Come out from the container with exit command 
+
+ 
+
+Step 4 – Start a container 
+
+	docker start <container ID>
+	
+docker start 083a48666e40
+
+	
+
+Step -5  logged into the bash of the  container 
+
+	docker exec -it 083a48666e40 bin/bash
+
+ 
+
+Step -6  Your container is ready to play any application try to install GIT in ubuntu container
+
+apt update 	
+
+apt install git-all 
+
+apt install ansible
+
+apt install python
+
+docker run -it -d -p 80:80 nginx
+	
+	docker run --name docker-nginx -d -p 80:80 nginx
+	
+	
+	docker rename practical_roentgen Avinash
+	
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Summary
+This was a Docker training session (Day 2) focused on containerization fundamentals. The instructor, Cloud(Vikas), taught participants how to install Docker using a scripted approach, explained Docker architecture and workflow, and provided hands-on practice with basic Docker commands.
+
+Key Notes
+Docker Installation:
+
+Used scripted approach via get.docker.com instead of manual apt install
+Installed Docker version 29.2.1 (compared to 28.x from previous session)
+Script works across all Linux flavors (Ubuntu, CentOS, Mint)
+Docker Architecture & Workflow:
+
+Docker client connects to Docker daemon
+Daemon checks for image locally; if not found, pulls from Docker Hub
+Daemon creates container from image
+Output displays in terminal
+Essential Commands Covered:
+
+docker pull - downloads image only
+docker run - downloads image and creates container
+docker ps / docker ps -a - view running/all containers
+docker images - list available images
+docker exec -it [container_id] /bin/bash - enter running container
+docker start [container_id] - restart stopped container
+docker commit [container_id] - convert container to image
+docker run --name [name] -d -p [host_port]:[container_port] - run with custom name, detached mode, and port mapping
+Key Concepts:
+
+Docker Hub: Public/private registry with 6.3M+ repositories
+Container lifecycle: run → exit → start → exec
+-it flag: interactive mode for container access
+-d flag: detached mode (runs in background)
+Port mapping required to access containerized applications externally
+Containers are lightweight; installing packages increases size significantly
+
+-------------------------------------------------------------------------------------------------------------
+Docker Scenario-Based Q&A
+1. Scenario: Container exits immediately after running
+
+Problem: You run docker run ubuntu but container stops right away
+Solution: Ubuntu container has no foreground process. Use docker run -it ubuntu /bin/bash to keep it interactive, or run with a service like docker run -d nginx
+2. Scenario: Cannot access application running in container
+
+Problem: Nginx is running in container but can't access via browser
+Solution: Use port mapping: docker run -d -p 8080:80 nginx, then access via localhost:8080
+3. Scenario: Need to install packages in existing container
+
+Problem: Container is running but missing required tools
+Solution:
+Enter container: docker exec -it [container_id] /bin/bash
+Install packages: apt update && apt install [package]
+Save changes: docker commit [container_id] new_image_name
+4. Scenario: Too many stopped containers cluttering system
+
+Problem: docker ps -a shows many exited containers
+Solution: Remove stopped containers with docker rm [container_id] or use docker container prune
+5. Scenario: Want to reuse container with custom name
+
+Problem: Need to identify containers easily
+Solution: Use docker run --name myapp -d nginx instead of random names.
+
+-------------------------------------------------------------------------------------------------------------
+Practical Exercises Performed in Today's Session
+1. Docker Installation Using Script
+Created Ubuntu VM on Google Cloud
+Used scripted approach from get.docker.com
+Installed Docker version 29.2.1
+2. Basic Docker Commands
+Pulled Hello World image: docker pull hello-world
+Ran first container: docker run hello-world
+Checked running containers: docker ps and docker ps -a
+Listed images: docker images
+3. Working with Ubuntu Container
+Pulled Ubuntu image: docker pull ubuntu
+Ran in interactive mode: docker run -it ubuntu
+Installed packages inside container:
+Updated packages: apt update
+Installed Python: apt install python3
+Exited and restarted container: docker start [container_id]
+Re-entered running container: docker exec -it [container_id] /bin/bash
+4. Container to Image Conversion
+Created custom image from modified container: docker commit [container_id]
+Verified new image in docker images list
+5. Nginx Web Server Deployment
+Pulled Nginx image: docker pull nginx
+Ran Nginx with port mapping: docker run -d -p 8080:80 nginx
+Accessed Nginx via browser on port 8080
+Ran container with custom name: docker run --name [your_name] -d -p 8080:80 nginx
+6. Container Lifecycle Management
+Started stopped containers
+Renamed containers
+Managed containers in detached mode using -d flag
+
+
+
+--------------------------------------------------------------------------------------------------------
+LinkedIn Post - Docker Training
+🚀 Excited to Share My Docker Learning Journey!
+
+Just completed an intensive hands-on Docker session and gained practical experience with containerization technology. Here's what I accomplished:
+
+✅ Set up Docker environment on cloud infrastructure
+✅ Mastered essential Docker commands and container lifecycle management
+✅ Deployed web applications using Nginx containers
+✅ Created custom Docker images from modified containers
+✅ Implemented port mapping for application accessibility
+
+Key Takeaways:
+
+Containers provide lightweight, portable application deployment
+Docker simplifies development and production environments
+Hands-on practice is crucial for mastering containerization
+The shift from traditional VMs to containers is transforming how we build and deploy applications. Excited to apply these skills in real-world projects!
+
+#Docker #Containerization #DevOps #CloudComputing #TechLearning #ProfessionalDevelopment
+
+Feel free to customize this post with specific details or achievements you'd like to highlight!
+
+
+
+-------------------------------------------------------------------------------------------------------
+Based on the meeting transcript, here are the interview questions and answers discussed:
+
+1. What is Docker?
+Answer: Docker is an open-source containerization platform tool that converts application code with binaries and its dependencies, making it lightweight, portable, and environment-friendly. With Docker, we can build, refine and ship images from one environment to another in containerized form.
+
+2. What are containers?
+Answer: Running image is known as container.
+
+3. Difference between Docker Pull and Docker Run?
+Answer:
+
+Docker Pull: Only downloads the image from Docker Hub
+Docker Run: Downloads the image (if not available locally) and also creates and runs the container. It performs both pull and execution.
+4. What is Docker Hub?
+Answer: Docker Hub is a registry where all the images are maintained. It has around 6.3 million public repositories. We can pull and push images from there. It can be used for personal or professional/company purposes.
+
+5. Docker workflow/architecture - Explain what happens when you run a Docker command?
+Answer:
+
+Docker client connects to Docker daemon
+Docker daemon checks if image is available locally. If not, it pulls the image from Docker Hub
+Docker daemon creates a new container from the image
+The container runs and output is visible in the terminal
+6. What is Docker daemon?
+Answer: Docker daemon is a background process that manages Docker containers and images.
+
+7. Difference between docker run -it and docker exec -it?
+Answer:
+
+docker run -it: Used for first time when creating and running a new container in interactive mode
+docker exec -it: Used to access an already running container in interactive mode
+8. How to convert container to image?
+Answer: Use docker commit command with container ID to create an image from a container.
+
+9. What is NGINX?
+Answer: NGINX is an open-source web server used for reverse proxy, caching, load balancing, and media streaming. It is a very popular web server with around 15 million applications running on it.
+
+Below commands executed
+1  apt update
+    2  sudo apt-get update
+    3  curl -fsSL https://get.docker.com -o install-docker.sh
+    4  ls
+    5  cat install-docker.sh 
+    6  sh install-docker.sh --dry-run
+    7  sudo sh install-docker.sh
+    8  docker --version
+    9  docker images
+   10  docker ps
+   11  docker ps -a
+   12  docker run hello-world:nanoserver-ltsc2025
+   13  docker run hello-world
+   14  docker ps
+   15  docker ps -a
+   16  docker images
+   17  docker run -it ubuntu
+   18  dcoker ps
+   19  docker ps
+   20  docker ps -a
+   21  docker start ubuntu
+   22  docker start bb27ab770d1b
+   23  docker ps
+   24  docker exec -it bb27ab770d1b
+   25  docker exec -it bb27ab770d1b bin/bash
+   26  docker exec -it bb27ab770d1b
+   27  docker exec -it bb27ab770d1b bin/bash
+   28  docker run -e TZ=Asia/Kolkata ubuntu:latest date
+   29  docker images
+   30  docker commit cd1dba651b30 bhavikcontainertoimage
+   31  docker commit ubuntu bhavikcontainertoimage
+   32  docker commit cd1dba651b30 bhavikcontainertoimage:lts
+   33  focker images
+   34  docker images
+   35  docker commit cd1dba651b30 bhavikcontainerimage:lts
+   36  docker ps
+   37  docker commit bb27ab770d1b bhavikcontainerimage:lts
+   38  docker images
+   39  docker pull nginx
+   40  docker images
+   41  docker run nginx
+   42  docker run -p 80:80 nginx
+   43  docker run -d -p 80:80 nginx
+   44  docker ps
+   45  docker rename brave_tu bhaviknginx
+   46  docker ps
+   47  docker stop 0ade4766063c
+   48  docker ps
+   49  docker ps -a
+   50  docker run --name bvknginx -d -p 80:80 nginx
