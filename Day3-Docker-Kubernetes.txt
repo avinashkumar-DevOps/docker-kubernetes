@@ -1,0 +1,178 @@
+Day 30 - Day2-Docker. 09-Feb-2026
+
+<Niginx Website>
+
+docker run --name web-nginx-nginx -d -p 80:80 nginx
+
+docker run --name docker-nginix -p 80:80 -d -v ~/docker-nginix/html:/usr/share/nginx/html nginx
+
+
+docker run 
+  --name docker-nginix 
+  -p 80:80 
+  -d 
+  -v ~/docker-nginix/html:/usr/share/nginx/html nginx 
+  
+  Volume mapping, default volume "/usr/share/nginx/html" to new volume "~/docker-nginix/html"
+  
+  
+
+
+
+<Jenkins>
+docker run -it -d -p 8080:8080 jenkins/jenkins:lts
+docker exec -it 789f8ff6dd56 /bin/bash
+
+docker exec -it <docker id> /bin/bash
+
+docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+
+
+
+Today's Session Summary (Day 3 - Docker)
+Main Topics Covered:
+
+1. Docker Installation & Setup
+Installed Docker using automated script: sudo apt update && sudo apt install docker.io -y
+Created VM instance (25GB, Ubuntu 24 LTS) on Google Cloud
+Verified installation with docker -v (version 28.2)
+2. Running NGINX Container
+Ran NGINX with port mapping: docker run -itd -p 80:80 --name docker-nginx-batch42 nginx
+Learned about -itd flags (interactive, terminal, detached mode)
+Accessed NGINX via external IP:80
+3. Volume Mapping (Custom Web Pages)
+Created custom HTML files in /root/html/ directory
+Mapped VM location to container: -v /root/html:/usr/share/nginx/html
+Modified index.html files dynamically (changes reflected without restart)
+Students created various custom pages (Google clone, Netflix, ChatGPT landing pages, etc.)
+4. Jenkins Container
+Ran Jenkins: docker run -itd -p 8080:8080 --name jenkins jenkins/jenkins
+Accessed admin password: docker exec -it <container-id> /bin/bash then cat /var/jenkins_home/secrets/initialAdminPassword
+5. Interview-Focused Concepts
+Container startup time: First run ~1.5 seconds, subsequent runs ~69 milliseconds (measured using time command)
+Alpine Linux: Lightweight image (3-8MB), production-ready for containerized applications
+Resource monitoring: docker stats command shows CPU/memory usage per container
+Multiple containers: Demonstrated running 10 containers using for-loops
+6. Key Commands
+docker ps / docker ps -a
+docker rm -f <container-id>
+docker exec -it <container-id> /bin/bash
+docker run --rm (auto-remove after execution)
+Assignment: Install Docker via script, pull Ubuntu/NGINX/CentOS images
+
+
+
+---------------------------------------------------------------------------------------------------
+
+Docker Interview Questions & Answers
+1. What is the difference between a Docker image and a container?
+
+Image is a template/blueprint (read-only)
+Container is a running instance of an image
+2. Why are containers faster than VMs?
+
+Containers share the host OS kernel
+VMs need full OS boot (minutes vs milliseconds)
+Your session showed: container starts in ~69ms vs VM boot time
+3. Explain the -itd flags in docker run
+
+-i: Interactive mode (keeps STDIN open)
+-t: Allocates a pseudo-TTY terminal
+-d: Detached mode (runs in background)
+4. What is volume mapping and why use it?
+
+Links host directory to container directory (-v /host/path:/container/path)
+Allows data persistence and live updates without container restart
+Example from session: /root/html:/usr/share/nginx/html
+5. What is Alpine Linux and why use it?
+
+Lightweight Linux distribution (3-8MB)
+Minimal attack surface, faster deployment
+Production-ready for containerized applications
+6. How do you check container resource usage?
+
+Use docker stats command
+Shows real-time CPU, memory, network I/O per container
+7. What does docker run --rm do?
+
+Automatically removes container after it stops
+Useful for temporary/testing containers
+8. How to access files inside a running container?
+
+docker exec -it <container-id> /bin/bash
+Example: Accessing Jenkins admin password
+9. Difference between docker ps and docker ps -a?
+
+docker ps: Shows only running containers
+docker ps -a: Shows all containers (running + stopped)
+10. How to run multiple containers quickly?
+
+Use shell loops: for i in {1..10}; do docker run -itd nginx; done
+
+-----------------------------------------------------------------
+
+
+Docker Practicals from Today's Session
+1. Docker Installation
+
+Updated system and installed Docker: sudo apt update && sudo apt install docker.io -y
+Verified installation: docker -v
+2. Running NGINX with Port Mapping
+
+Basic NGINX container: docker run -itd -p 80:80 --name docker-nginx-batch42 nginx
+Accessed via browser using external IP
+3. Custom Web Pages with Volume Mapping
+
+Created HTML directory: mkdir /root/html
+Created custom index.html files
+Ran NGINX with volume: docker run -itd -p 80:80 -v /root/html:/usr/share/nginx/html nginx
+Students created various pages (Google clone, Netflix, ChatGPT landing pages)
+4. Jenkins Container Setup
+
+Ran Jenkins: docker run -itd -p 8080:8080 --name jenkins jenkins/jenkins
+Retrieved admin password: docker exec -it <container-id> /bin/bash then cat /var/jenkins_home/secrets/initialAdminPassword
+5. Container Performance Testing
+
+Measured startup time using time command
+First run: ~1.5 seconds
+Subsequent runs: ~69 milliseconds
+6. Resource Monitoring
+
+Used docker stats to monitor CPU and memory usage
+7. Running Multiple Containers
+
+Created 10 containers using for-loop: for i in {1..10}; do docker run -itd nginx; done
+8. Container Management Commands
+
+Listed containers: docker ps and docker ps -a
+Removed containers: docker rm -f <container-id>
+Auto-remove practice: docker run --rm
+
+--------------------------------------------------------------
+
+LinkedIn Post - Docker Learning Journey
+🚀 Day 3: Diving Deep into Docker!
+
+Just completed an intensive Docker session and I'm excited to share what I learned:
+
+✅ Set up Docker from scratch on Google Cloud
+✅ Deployed NGINX containers with custom web pages
+✅ Implemented volume mapping for live updates
+✅ Launched Jenkins in containers
+✅ Measured container performance - 69ms startup time!
+
+Key Takeaways:
+
+Containers are incredibly fast compared to VMs
+Volume mapping enables seamless development workflows
+Alpine Linux is a game-changer for production deployments
+Docker makes application deployment consistent and portable
+Hands-on Experience:
+Created custom web pages, managed multiple containers simultaneously, and learned production-ready practices that I can apply immediately.
+
+The shift from traditional VMs to containerization is transformative. Excited to continue this DevOps journey!
+
+#Docker #DevOps #CloudComputing #Containerization #LearningInPublic #TechSkills
+
+-----------------------------------------------------------------------------------------------------------------
+
