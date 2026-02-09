@@ -5,7 +5,7 @@ Day 30 - Day2-Docker. 09-Feb-2026
 docker run --name web-nginx-nginx -d -p 80:80 nginx
 
 docker run --name docker-nginix -p 80:80 -d -v ~/docker-nginix/html:/usr/share/nginx/html nginx
-
+docker run --name docker-nginx -p 80:80 -d -v ~/docker-nginx/html:/usr/share/nginx/html nginx
 
 docker run 
   --name docker-nginix 
@@ -15,7 +15,9 @@ docker run
   
   Volume mapping, default volume "/usr/share/nginx/html" to new volume "~/docker-nginix/html"
   
-  
+
+
+docker image rm -f centos:centos7
 
 
 
