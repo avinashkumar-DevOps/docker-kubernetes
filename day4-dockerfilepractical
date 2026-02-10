@@ -1,0 +1,18 @@
+1  curl -fsSL https://get.docker.com -o install-docker.sh
+2  sudo sh install-docker.sh
+3  docker --version
+4  apt-get update
+5  vi Dockerfile
+    FROM ubuntu
+    MAINTAINER <avinash.kr@live.in>
+    RUN apt-get update && apt-get install nginx -y
+    CMD ["echo","Image Created"]
+## Save DockerFile
+### Build Docker ###
+6  docker build -t avinash-nginx .
+7  docker images
+## Docker Taging ##
+8  docker tag 6cdc376d126e avinashkr07/avinash-nginx:latest
+9  docker images
+10  docker login
+11  docker push avinashkr07/avinash-nginx:latest
