@@ -16,3 +16,8 @@
 9  docker images
 10  docker login
 11  docker push avinashkr07/avinash-nginx:latest
+
+
+docker lint : 
+https://hadolint.github.io/hadolint/
+
